@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon UI | Sheriyans Cohort 3.0</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root { --pika: #FFCC00; --cream: #FDF5E6; }
+
+        * { margin: 0;
+             padding: 0;
+              box-sizing: border-box; }
+        
+        html, body, .main-card, .flex-col {
+            height: 100%;
+             width: 100%;
+              display: flex;
+        }
+
+        body { font-family: 'Arial',
+         sans-serif;
+          background: #e2dddd;
+           align-items: center;
+            justify-content: center; }
+
+        .abs { position: absolute; }
+        .flex-col { flex-direction: column; 
+            justify-content: center; }
+        .blend { mix-blend-mode: multiply; }
+
+        .main-card { position: relative;
+             background: #fff; 
+             overflow: hidden; }
+
+        .left-side { width: 60%; 
+            background: var(--pika); 
+            padding: 0 8%; z-index: 1; }
+        .right-side { width: 40%;
+             background: var(--cream);
+              z-index: 1; }
+
+        .logo { width: 140px; 
+            top: 40px; 
+            left: 60px;
+             z-index: 10; }
+        
+        .ball-mark {
+            width: 300px; 
+            bottom: -80px; 
+            left: 20px;
+            opacity: 0.12; 
+            z-index: 2; 
+            pointer-events: none; 
+            transform: rotate(-10deg);
+        }
+
+        .pikachu-img {
+            height: 80vh;
+             bottom: 0; 
+             left: 70%;
+            transform: translateX(-70%); 
+            z-index: 10;
+        }
+
+        h1 { font-size: clamp(4rem, 8vw, 6rem);
+             font-weight: 900; 
+             line-height: 0.8;
+              text-transform: uppercase; 
+              margin: 10px 0 30px; }
+        
+        .sub-heading { letter-spacing: 5px;
+             font-size: 14px;
+              font-weight: bold;
+               color: #333; }
+        
+        .description { max-width: 360px; 
+            font-size: 16px;
+             line-height: 1.6; 
+             color: #333;
+              margin-bottom: 40px; }
+        
+        .page-count { font-weight: 900;
+             display: flex; 
+             align-items: center;
+              gap: 15px; }
+        .line { width: 45px;
+             height: 2px;
+              background: #000; }
+
+        .menu-icon { top: 40px; 
+            right: 50px;
+             font-size: 2.2rem; 
+             z-index: 20; 
+             cursor: pointer; }
+
+       .dots { 
+            right: 30px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            gap: 15px; 
+            z-index: 20;
+            width: auto; 
+            height: auto;
+        }
+
+        .dot { 
+            width: 8px; 
+            height: 8px; 
+            background: var(--pika); 
+            border-radius: 50%; 
+            border: 1px solid rgba(0,0,0,0.1); 
+        }
+        
+        .dot.active { 
+            background: #000; 
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-card">
+        <img src="pokemon-logo.png" class="logo abs blend" alt="Logo">
+        <img src="pokeball-logo.svg" class="ball-mark abs blend" alt="Watermark">
+        <i class="ri-menu-line menu-icon abs"></i>
+
+        <div class="left-side flex-col">
+            <p class="sub-heading">POKEMON GEN I</p>
+            <h1>Pikachu</h1>
+            <p class="description">Pikachu is an Electric-type Pokémon introduced in Generation I. They are small, chubby, and incredibly cute mouse-like Pokémon.</p>
+            <div class="page-count"><div class="line"></div> 01 / 08</div>
+        </div>
+
+        <div class="right-side">
+            <div class="dots abs flex-col">
+                <div class="dot active">
+                </div><div class="dot">
+                </div><div class="dot">
+                </div><div class="dot">
+                </div><div class="dot">
+
+                </div>
+            </div>
+        </div>
+
+        <img src="pokemon.png" class="pikachu-img abs" alt="Pikachu">
+    </div>
+</body>
+</html>
