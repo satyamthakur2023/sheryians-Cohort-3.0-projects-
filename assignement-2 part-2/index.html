@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Dark Landing Page</title>
+  
+  <!-- Google Fonts for Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* 1. Global Resets & Theme */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      overflow-y: auto; /* Allows smooth scrolling between hero and profile sections */
+    }
+
+    /* 2. Hero Section with Cinematic Vignette Background */
+    .hero-container {
+      width: 100%;
+      min-height: 80vh; /* Scaled slightly to naturally flow into the profile block */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 20px 40px 20px;
+      background: radial-gradient(circle at center, #141414 0%, #000000 85%);
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 15px;
+      background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #737373;
+      letter-spacing: 0.5px;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    /* 3. FIXED COORDINATION: Aligning elements across the top screen edge */
+    
+    /* LEFT SIDE: Logo & Name Area */
+    .nav-brand {
+      position: fixed;
+      top: 41px; /* Perfectly aligned to the vertical center of the navbar container */
+      left: 4%;  /* Dynamically matched with the width layout of the navbar */
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1001;
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #ff6b00, #ff9e00); /* Premium orange accent gradient */
+      border-radius: 6px;
+    }
+
+    /* Vertical line divider using an hr tag styled to match */
+    .nav-brand hr {
+      border: none;
+      width: 1px;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    /* CENTER SIDE: Floating Top Navigation Bar Container */
+    .top-nav {
+      position: fixed;
+      top: 30px; 
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92%;
+      max-width: 600px;
+      
+      /* Pure layout formatting dedicated to alignment */
+      display: flex;
+      justify-content: center; /* Forces the menu links strictly into the exact center */
+      align-items: center;
+      
+      background-color: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 24px;
+      border-radius: 100px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 
+                  0 0 1px rgba(255, 255, 255, 0.1) inset;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* 4. Advanced "Roll-Up" Orange Hover Effect */
+    .nav-item {
+      overflow: hidden; /* Clips the text rolling outside the link box */
+      height: 20px;     /* Fixed height constraint for accurate rolling */
+      display: block;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: block;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    /* The original default word */
+    .nav-links a .word-default {
+      display: block;
+      color: #737373;
+      transition: color 0.35s ease;
+    }
+
+    /* The secret orange word hiding just underneath */
+    .nav-links a .word-hover {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      color: #ff6b00; /* Vibrant Orange color */
+    }
+
+    /* [Hover State] Both words slide upwards together cleanly */
+    .nav-item:hover a {
+      transform: translateY(-100%);
+    }
+
+    /* [Active / Click State] Feels tactile and snaps downward slightly */
+    .nav-item:active {
+      transform: translateY(4px);
+    }
+
+    /* RIGHT SIDE: Profile Icon Area */
+    .nav-profile {
+      position: fixed;
+      top: 38px; /* Balanced perfectly on screen space right across from the brand */
+      right: 4%;
+      display: flex;
+      align-items: center;
+      z-index: 1001;
+    }
+
+    .profile-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      object-fit: cover;
+      cursor: pointer;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .profile-avatar:hover {
+      border-color: #ff6b00;
+      transform: scale(1.05);
+    }
+
+    /* 5. Message & Profile Photo Section Layout */
+    .profile-section-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 100px 20px;
+      background-color: #000000;
+    }
+
+    /* Message Area Container */
+    .message-header {
+      text-align: center;
+      margin-bottom: 40px;
+      max-width: 600px;
+      padding: 0 20px;
+    }
+
+    .message-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .message-header p {
+      color: #737373;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* 4-Column Profile Grid Container */
+    .profile-series-container {
+      display: flex;
+      width: 100%;
+      max-width: 1100px;
+      height: 480px;
+      gap: 15px; /* Subtle space between panels */
+    }
+
+    .profile-panel {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: #0a0a0a;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+    }
+
+    /* The Image Setup for a Merged Face Grid */
+    .profile-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Ensures the portrait stays aligned correctly across all frames */
+      object-position: center 20%; 
+      filter: grayscale(100%) brightness(70%);
+      transition: filter 0.4s ease, transform 0.4s ease;
+    }
+
+    /* Text Overlay details based on h3 lines */
+    .panel-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+      z-index: 2;
+    }
+
+    .panel-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      color: #ffffff;
+      transform: translateY(5px);
+      transition: transform 0.4s ease, color 0.4s ease;
+    }
+
+    .panel-content h3 span {
+      color: #ff6b00; /* Matching your signature orange theme color */
+    }
+
+    .panel-content p {
+      font-size: 0.85rem;
+      color: #a3a3a3;
+      font-weight: 300;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    /* Hover States for Interactive Feel */
+    .profile-panel:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 107, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(255, 107, 0, 0.1);
+    }
+
+    .profile-panel:hover img {
+      filter: grayscale(0%) brightness(90%);
+      transform: scale(1.03);
+    }
+
+    .profile-panel:hover .panel-content h3 {
+      transform: translateY(0);
+      color: #ff6b00;
+    }
+
+    /* Responsive adjustments for mobile devices */
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 10px 16px;
+        border-radius: 24px;
+      }
+      .nav-links {
+        display: none; /* Hides raw links on mobile to preserve design integrity */
+      }
+      .profile-series-container {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+      }
+      .profile-panel {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Side Brand (Outside Header Container) -->
+  <div class="nav-brand">
+    <div class="brand-logo"></div>
+    <hr>
+    <span class="brand-name">NEXUS</span>
+  </div>
+
+  <!-- Floating Center Top Navigation Bar -->
+  <header class="top-nav">
+    <!-- Center: Interactive Menu Links -->
+    <nav>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="#home">
+            <span class="word-default">Home</span>
+            <span class="word-hover">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#work">
+            <span class="word-default">Work</span>
+            <span class="word-hover">Work</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#about">
+            <span class="word-default">About</span>
+            <span class="word-hover">About</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#journal">
+            <span class="word-default">Journal</span>
+            <span class="word-hover">Journal</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Right Side Profile (Outside Header Container) -->
+  <div class="nav-profile">
+    <!-- Replace the src URL below with your actual profile picture file path -->
+    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Profile" class="profile-avatar">
+  </div>  
+    
+  <!-- Main Cover Page Layout -->
+  <main class="hero-container">
+    <div class="hero-content">
+      <h1>Simplicity is Luxury.</h1>
+      <p>A minimalist sanctuary engineered for ultimate visual depth and interactive precision.</p>
+    </div>
+  </main>
+    
+
+<!-- New 50/50 Card Split Layout Workspace Section -->
+  <section class="workspace-section">
+    <div class="workspace-container">
+      
+      <!-- LEFT SIDE (50% Area) - Grid of 3 Cards -->
+      <div class="workspace-left-grid">
+        <!-- Top Small Card 1 -->
+        <div class="ws-card small-card">
+          <div class="card-tag">Analytics</div>
+          <h3>Performance Matrix</h3>
+          <p>Real-time telemetry tracking interface response efficiency.</p>
+        </div>
+        
+        <!-- Top Small Card 2 -->
+        <div class="ws-card small-card">
+          <div class="card-tag">Security</div>
+          <h3>System Core</h3>
+          <p>Encrypted nodes managing peripheral network distribution.</p>
+        </div>
+        
+        <!-- Bottom Single Large Card -->
+        <div class="ws-card large-card">
+          <div class="card-tag">Control Center</div>
+          <h3>Project Overview & Operational Parameters</h3>
+          <p>A centralized data terminal compiling interactive logs, framework deployments, and luxury layout benchmarks seamlessly across your live system.</p>
+          <div class="ws-card-footer">Status: Active</div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE (50% Area) - Single Large Video Placement Card -->
+      <div class="workspace-right-video">
+        <div class="ws-card video-card">
+          <!-- Video Box Wrapper -->
+          <div class="video-wrapper">
+            <!-- Placeholder standard video element (uncomment and add your source path) -->
+            <!-- <video src="your-video-path.mp4" autoplay loop muted playsinline></video> -->
+            
+            <!-- Minimalist visual asset placeholder directly matching the orange theme -->
+            <div class="video-placeholder-ui">
+              <div class="play-button-icon"></div>
+              <span>Stream Preview</span>
+            </div>
+          </div>
+          
+          <!-- Video Information Overlay Footer -->
+          <div class="video-card-content">
+            <div class="card-tag alert-tag">Live Feed</div>
+            <h3>Cinematic System Showreel</h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Append the accompanying styling into your existing <style> tag blocks -->
+  <style>
+    /* Workspace Section Layout */
+    .workspace-section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px 120px 20px;
+      background-color: #000000;
+    }
+
+    .workspace-container {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      gap: 24px; /* Space between the two 50% sides */
+    }
+
+    /* Left Side Grid Split (50% Width) */
+    .workspace-left-grid {
+      flex: 1;
+      width: 50%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 equal small columns on top */
+      grid-template-rows: 180px 276px;       /* Top row is shorter, bottom row holds large card */
+      gap: 20px;
+    }
+
+    /* Forces the bottom card to span across both grid columns */
+    .large-card {
+      grid-column: span 2; 
+    }
+
+    /* Right Side Video Wrapper (50% Width) */
+    .workspace-right-video {
+      flex: 1;
+      width: 50%;
+      display: flex;
+    }
+
+    /* Base Styling Shared Across All Workspace Cards */
+    .ws-card {
+      background-color: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                  border-color 0.4s ease, 
+                  box-shadow 0.4s ease;
+    }
+
+    /* Premium interactive hover states */
+    .ws-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 107, 0, 0.3);
+      box-shadow: 0 20px 40px rgba(255, 107, 0, 0.05);
+    }
+
+    /* Universal Label Tags Inside Cards */
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #737373;
+      margin-bottom: 12px;
+    }
+
+    .alert-tag {
+      color: #ff6b00; /* Distinct orange tracking color */
+    }
+
+    /* Card Content Typography */
+    .ws-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .ws-card p {
+      font-size: 0.85rem;
+      color: #a3a3a3;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* Large Card Specific Layout Elements */
+    .large-card h3 {
+      font-size: 1.4rem;
+      max-width: 80%;
+    }
+
+    .large-card p {
+      max-width: 90%;
+    }
+
+    .ws-card-footer {
+      margin-top: auto;
+      font-size: 0.75rem;
+      color: #ff6b00;
+      font-weight: 500;
+    }
+
+    /* Video Placement Card Details (Right Side) */
+    .video-card {
+      width: 100%;
+      height: 476px; /* Dynamically matches the combined height of the left grid perfectly */
+      padding: 0;   /* Flush frame boundaries for full size video look */
+    }
+
+    .video-wrapper {
+      width: 100%;
+      height: 80%;
+      background-color: #121212;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Placeholder Video UI Design */
+    .video-placeholder-ui {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      background: radial-gradient(circle at center, #1c1c1c 0%, #0a0a0a 100%);
+    }
+
+    .play-button-icon {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 107, 0, 0.15);
+      border: 1.5px solid #ff6b00;
+      border-radius: 50%;
+      position: relative;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    /* Pure CSS Play Icon Triangle */
+    .play-button-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      border-style: solid;
+      border-width: 7px 0 7px 12px;
+      border-color: transparent transparent transparent #ff6b00;
+    }
+
+    .video-card:hover .play-button-icon {
+      transform: scale(1.1);
+      background-color: rgba(255, 107, 0, 0.3);
+    }
+
+    .video-placeholder-ui span {
+      font-size: 0.8rem;
+      color: #737373;
+      letter-spacing: 0.5px;
+    }
+
+    .video-card-content {
+      padding: 20px 24px;
+      height: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .video-card-content h3 {
+      margin-bottom: 0;
+    }
+
+    /* Responsive scaling for mobile screens */
+    @media (max-width: 900px) {
+      .workspace-container {
+        flex-direction: column;
+      }
+      .workspace-left-grid, .workspace-right-video {
+        width: 100%;
+      }
+      .workspace-left-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .large-card {
+        grid-column: span 1;
+      }
+      .video-card {
+        height: 350px;
+      }
+    }
+  </style>
+
+<!-- Tech-Minimalist Box Heading Section with 4 Corner Dots -->
+<div class="accent-heading-wrapper">
+  <h2 class="corner-dot-heading">
+    <!-- The 4 distinct physical corner anchors -->
+    <span class="dot top-left"></span>
+    <span class="dot top-right"></span>
+    <span class="dot bottom-left"></span>
+    <span class="dot bottom-right"></span>
+    
+    System Architecture
+  </h2>
+</div>
+
+<style>
+  /* 1. Structural Outer Wrapper */
+  .accent-heading-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: #000000; /* Keeps it flush with your dark mode canvas */
+  }
+
+  /* 2. The Heading Container with Solid Borders */
+  .corner-dot-heading {
+    position: relative;
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+    
+    /* Padding keeps text cleanly separated from the enclosing frame lines */
+    padding: 16px 36px;
+    
+    /* The connected solid border frame lines */
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    display: inline-block;
+    text-align: center;
+    
+    /* Subtle glow texture across the frame structure */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.02);
+  }
+
+  /* 3. Base Properties Shared Across All 4 Corner Dots */
+  .corner-dot-heading .dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ff6b00; /* Signature premium orange accent color */
+    z-index: 5;
+  }
+
+  /* 4. Individual Axis Layout Mapping for each distinct corner */
+  
+  /* Top Left Corner Placement */
+  .corner-dot-heading .top-left {
+    top: -3px;
+    left: -3px;
+  }
+
+  /* Top Right Corner Placement */
+  .corner-dot-heading .top-right {
+    top: -3px;
+    right: -3px;
+  }
+
+  /* Bottom Left Corner Placement */
+  .corner-dot-heading .bottom-left {
+    bottom: -3px;
+    left: -3px;
+  }
+
+  /* Bottom Right Corner Placement */
+  .corner-dot-heading .bottom-right {
+    bottom: -3px;
+    right: -3px;
+  }
+</style>
+  <!-- Lower Section for Message and Profile Dynamic Grid Layout -->
+  < class="profile-section-wrapper">
+    <!-- Top Message Layer -->
+    <section class="message-header">
+      <h2>Fragments of Identity</h2>
+      <p>A sequential exploration of form, perspective, and continuous portrait design across structural borders.</p>
+    </section>
+
+<div class="button-showcase">
+  
+  <!-- Button 1: Fully Curved Minimal Arrow -->
+  <button class="btn btn-curved">
+    <span class="btn-text"></span> <!-- Left empty space -->
+    <div class="arrow-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+      </svg>
+    </div>
+  </button>
+
+  <!-- Button 2: "Get In Touch" Link with Arrow -->
+  <button class="btn btn-touch">
+    <span>Get in Touch</span>
+    <svg class="inline-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+    </svg>
+  </button>
+
+  <!-- Button 3: Solid Orange "Start a Journey" -->
+  <button class="btn btn-journey">
+    <span>Start a Journey</span>
+  </button>
+
+</div>
+<style>
+/* Base container layout to showcase the buttons */
+.button-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 60px 20px;
+  background-color: #000000;
+}
+
+/* Universal base properties for crisp cross-browser rendering */
+.btn {
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+
+/* ==========================================================================
+   BUTTON 1: ALL RADIUS CURVED (EMPTY LEFT SPACE + RIGHT ARROW)
+   ========================================================================== */
+.btn-curved {
+  background-color: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Generates a broad empty buffer space on the left side */
+  padding: 8px 8px 8px 48px; 
+  border-radius: 100px; /* Perfect all-radius pill curvature */
+}
+
+.btn-curved .arrow-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #ff6b00; /* Signature premium orange background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+}
+
+.btn-curved .arrow-circle svg {
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+}
+
+/* Hover: Lifts the button slightly and pushes the arrow forward */
+.btn-curved:hover {
+  background-color: #121212;
+  border-color: rgba(255, 107, 0, 0.3);
+}
+
+.btn-curved:hover .arrow-circle {
+  transform: translateX(4px);
+  background-color: #ff8522;
+}
+
+/* Click/Active State feedback */
+.btn-curved:active {
+  transform: scale(0.98);
+}
+
+
+/* ==========================================================================
+   BUTTON 2: "GET IN TOUCH" WITH INLINE ACCELERATING ARROW
+   ========================================================================== */
+.btn-touch {
+  padding: 14px 28px;
+  border-radius: 100px;
+  background-color: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a3a3a3;
+  font-size: 0.95rem;
+  font-weight: 500;
+  gap: 12px;
+}
+
+.btn-touch .inline-arrow {
+  width: 16px;
+  height: 16px;
+  color: #ff6b00; /* Subtle orange arrow focus pointer */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
+}
+
+/* Hover: Brightens text to full white and pops the arrow out */
+.btn-touch:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: #111111;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.btn-touch:hover .inline-arrow {
+  transform: translateX(6px);
+  color: #ffffff;
+}
+
+.btn-touch:active {
+  transform: translateY(2px);
+}
+
+
+/* ==========================================================================
+   BUTTON 3: "START A JOURNEY" (WHITE TEXT + SOLID ORANGE BACK)
+   ========================================================================== */
+.btn-journey {
+  background-color: #ff6b00; /* Vibrant solid orange background */
+  color: #ffffff;            /* High contrast crisp white text */
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 12px; /* Balanced tech radius profile style */
+  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.15);
+}
+
+/* Hover: Deepens background color and creates ambient outward glow */
+.btn-journey:hover {
+  background-color: #e05e00;
+  box-shadow: 0 8px 30px rgba(255, 107, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-journey:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.1);
+}
+</style>
+
+
+    <!-- 4-Photo Continuous Layout Structure -->
+    <div class="profile-series-container">
+
+      <!-- Photo Panel 01 -->
+      <div class="profile-panel">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" alt="Profile View 1">
+        <div class="panel-content">
+          <h3>01 // <span>Origin</span></h3>
+          <p>The baseline composition focusing on structural profile silhouettes.</p>
+        </div>
+      </div>
+
+      <!-- Photo Panel 02 -->
+      <div class="profile-panel">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt="Profile View 2">
+        <div class="panel-content">
+          <h3>02 // <span>Perspective</span></h3>
+          <p>Shifting focus points across the vertical dynamic divider grid.</p>
+        </div>
+      </div>
+
+      <!-- Photo Panel 03 -->
+      <div class="profile-panel">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80" alt="Profile View 3">
+        <div class="panel-content">
+          <h3>03 // <span>Exposure</span></h3>
+          <p>Controlling lighting levels to blend seamless midtones together.</p>
+        </div>
+      </div>
+
+      <!-- Photo Panel 04 -->
+      <div class="profile-panel">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80" alt="Profile View 4">
+        <div class="panel-content">
+          <h3>04 // <span>Clarity</span></h3>
+          <p>The final frame resolution uniting the collective series sequence.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+</body>
+</html>

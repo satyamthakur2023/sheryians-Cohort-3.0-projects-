@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squid Game UI Concept</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff005c;
+            --orange: #ff7a00;
+            --dark-purple: #1a0b16;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at 70% 30%, #4a0e2a 0%, var(--dark-purple) 70%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo { font-weight: 900; letter-spacing: -1px; font-size: 1.5rem; }
+        .logo span { color: var(--pink); }
+
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 0.9rem; 
+            opacity: 0.7; 
+            transition: 0.3s;
+        }
+        .nav-links a.active { opacity: 1; border-bottom: 2px solid var(--pink); padding-bottom: 5px; }
+        .nav-links a:hover { opacity: 1; }
+
+        /* --- Hero Section --- */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            padding: 10rem 5% 0;
+            min-height: 85vh;
+            position: relative;
+        }
+
+        .hero-content { z-index: 2; align-self: center; }
+
+        .main-title {
+            font-size: 6rem;
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .metadata {
+            font-size: 1rem;
+            opacity: 0.6;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-container { display: flex; gap: 1.5rem; }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-play {
+            background: linear-gradient(90deg, var(--pink), var(--orange));
+            color: white;
+            border: none;
+        }
+
+        .btn-trailer {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--pink);
+        }
+
+        .btn:hover { transform: scale(1.05); }
+
+        /* --- Background Character --- */
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 10%;
+            height: 90%;
+            z-index: 1;
+        }
+        
+        /* Simulating the masked guard */
+        .guard-placeholder {
+            width: 500px;
+            height: 700px;
+            background: linear-gradient(to bottom, transparent, var(--dark-purple)), url('https://via.placeholder.com/500x700/e91e63/ffffff?text=GUARD');
+            background-size: cover;
+            mask-image: linear-gradient(to left, black 70%, transparent 100%);
+            border-radius: 20px;
+            opacity: 0.8;
+        }
+
+        /* --- Gallery Section --- */
+        .bottom-section {
+            background: rgba(20, 5, 15, 0.8);
+            backdrop-filter: blur(20px);
+            margin: -100px 5% 2rem;
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            z-index: 10;
+            position: relative;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .thumbnail {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: #333;
+            cursor: pointer;
+        }
+
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .thumbnail:hover img { transform: scale(1.1); }
+
+        .play-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- Decorative Sidebar Text --- */
+        .side-text {
+            position: fixed;
+            right: -100px;
+            top: 50%;
+            transform: rotate(90deg);
+            font-size: 8rem;
+            font-weight: 900;
+            opacity: 0.03;
+            pointer-events: none;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="side-text">SQUID</div>
+
+    <nav>
+        <div class="logo">SQUID <span>GAME</span></div>
+        <div class="nav-links">
+            <a href="#">About</a>
+            <a href="#" class="active">Watch now</a>
+            <a href="#">Actors</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="menu-icon">☰</div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">SQUID<br>GAME</h1>
+            <div class="metadata">
+                Action / Thriller / Drama Series directed by Dong-hyuk Hwang<br>
+                Season 1: 9 Episodes
+            </div>
+            <div class="btn-container">
+                <a href="#" class="btn btn-play">▶ Play Now</a>
+                <a href="#" class="btn btn-trailer">▷ Watch Trailer</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <div class="guard-placeholder"></div>
+        </div>
+    </main>
+
+    <section class="bottom-section">
+        <div class="gallery-grid">
+            <div class="thumbnail">
+                <img src="https://via.placeholder.com/400x225/e91e63/ffffff?text=Episode+1" alt="ep1">
+                <div class="play-icon">▶</div>
+            </div>
+            <div class="thumbnail">
+                <img src="https://via.placeholder.com/400x225/00bcd4/ffffff?text=Episode+2" alt="ep2">
+                <div class="play-icon">▶</div>
+            </div>
+            <div class="thumbnail">
+                <img src="https://via.placeholder.com/400x225/673ab7/ffffff?text=Episode+3" alt="ep3">
+                <div class="play-icon">▶</div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
