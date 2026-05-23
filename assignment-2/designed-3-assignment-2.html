@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insect Classification UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-red: #b32e24;
+            --text-dark: #1a3026;
+            --gold: #c5a059;
+            --gold-dark: #8e6d3b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            background: linear-gradient(to right, #ffffff 50%, var(--bg-red) 50%);
+        }
+
+        nav {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            z-index: 10;
+        }
+
+        .logo { font-family: 'Inter'; font-weight: 800; letter-spacing: 2px; font-size: 1.5rem; color: var(--text-dark); }
+        .search-bar { background: #f0f0f0; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; width: 250px; }
+        .nav-links a { text-decoration: none; color: white; margin-left: 2rem; font-size: 0.9rem; opacity: 0.9; }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-panel {
+            display: flex;
+            align-items: center;
+            padding-left: 4rem;
+            position: relative;
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-right: 3rem;
+        }
+
+        .stats-list { list-style: none; border-left: 1px solid #eee; padding-left: 2rem; }
+        .stats-list li { margin-bottom: 1.5rem; }
+        .stats-list label { display: block; font-size: 0.75rem; font-weight: 700; color: #b32e24; margin-bottom: 4px; }
+        .stats-list label::before { content: '●'; margin-right: 8px; font-size: 0.6rem; }
+        .stats-list span { font-size: 1rem; color: #555; }
+
+        .hero-center {
+            position: absolute;
+            left: 50%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            text-align: center;
+        }
+
+        .bell-jar {
+            width: 220px;
+            height: 380px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 110px 110px 0 0;
+            backdrop-filter: blur(2px);
+            position: relative;
+            box-shadow: inset 0 20px 40px rgba(255,255,255,0.2);
+        }
+
+        .insect-img {
+            width: 180px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -45%);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        .base {
+            width: 240px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+            margin: -5px auto 0;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-top: 2px solid #e9d1a5;
+        }
+
+        .right-panel {
+            padding: 8rem 4rem 2rem 6rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .species-name { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1; margin-bottom: 2rem; }
+        .info-grid { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .info-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
+
+        .price { font-size: 2.5rem; font-weight: 600; margin: 1.5rem 0; color: #f2c94c; }
+
+        .toggle-group { margin-bottom: 2rem; }
+        .toggle-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.8rem; opacity: 0.9; }
+        
+        .switch { width: 34px; height: 18px; background: rgba(255,255,255,0.3); border-radius: 20px; position: relative; cursor: pointer; }
+        .switch::before { content: ''; position: absolute; width: 14px; height: 14px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.3s; }
+
+        .btn-add {
+            background: #d9b38c;
+            color: #4a3a2a;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 8px;
+            font-weight: 600;
+            width: fit-content;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-add:hover { background: #c5a059; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">INSECT</div>
+        <input type="text" class="search-bar" placeholder="Search...">
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+            <a href="#">Gallery</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="left-panel">
+            <div class="vertical-text">Classification</div>
+            <ul class="stats-list">
+                <li><label>Class:</label><span>Insecta</span></li>
+                <li><label>Order:</label><span>Coleoptera</span></li>
+                <li><label>Family:</label><span>Cerambycidae</span></li>
+                <li><label>Sub-Family:</label><span>Cerambycinae</span></li>
+                <li><label>Tribe:</label><span>Callicromatini</span></li>
+                <li><label>Genus:</label><span>Pachyteria</span></li>
+            </ul>
+        </div>
+
+        <div class="right-panel">
+            <h1 class="species-name">Pachyteria<br>equestris</h1>
+            
+            <div class="info-grid">
+                <div class="info-item">📍 Locality: Malaysia</div>
+                <div class="info-item">♂ Sex: Male</div>
+                <div class="info-item">📏 Size: 32 mm / 12 mm</div>
+            </div>
+
+            <div class="price">$5.99</div>
+
+            <div class="toggle-group">
+                <div class="toggle-item"><div class="switch"></div> View detailed antennae</div>
+                <div class="toggle-item"><div class="switch"></div> View underside</div>
+            </div>
+
+            <button class="btn-add">Add to collection</button>
+        </div>
+    </div>
+
+    <div class="hero-center">
+        <div class="bell-jar">
+            <img src="images/image.png" alt="Pachyteria Equestris" class="insect-img" onerror="this.src='https://via.placeholder.com/180x300?text=Insect+PNG'">
+        </div>
+        <div class="base"></div>
+    </div>
+
+</body>
+</html>
