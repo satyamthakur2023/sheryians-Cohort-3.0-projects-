@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gunaforycter Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --accent-orange: #d96e27;
+            --accent-orange-glow: rgba(217, 110, 39, 0.15);
+            --text-main: #ffffff;
+            --text-muted: #999999;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --border-color: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 1px;
+            background-color: var(--accent-orange);
+        }
+
+        .divider-icon {
+            color: var(--accent-orange);
+            font-size: 0.8rem;
+        }
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .drink-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .drink-card.active {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 30px var(--accent-orange-glow);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 0.75rem;
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(20, 20, 20, 0.8);
+            z-index: 2;
+        }
+
+        .badge i {
+            font-size: 0.65rem;
+        }
+        
+        .badge .dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .drink-img-wrapper {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .drink-img-wrapper img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px; 
+        }
+
+        .drink-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .drink-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .drink-card .price {
+            color: var(--accent-orange);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: auto;
+        }
+        .chef-special {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            display: flex;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .chef-special::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: radial-gradient(circle, var(--accent-orange-glow) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .chef-image {
+            flex: 0 0 40%;
+            min-height: 350px;
+        }
+
+        .chef-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .chef-content {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .chef-label {
+            color: var(--accent-orange);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .chef-content h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .chef-content .subtitle {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .chef-content .description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            max-width: 90%;
+        }
+
+        .btn-explore {
+            align-self: flex-start;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--accent-orange);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-explore:hover {
+            background-color: var(--accent-orange);
+            color: #fff;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--text-main);
+        }
+
+        .footer-nav .dot {
+            color: var(--accent-orange);
+            font-size: 1.2rem;
+            line-height: 0;
+        }
+
+        .footer-social {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-orange);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-orange);
+            color: #fff;
+        }
+
+        @media (max-width: 900px) {
+            .chef-special {
+                flex-direction: column;
+            }
+            .chef-image {
+                height: 250px;
+                min-height: auto;
+            }
+            .chef-content {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>Gunaforycter</h1>
+            <div class="divider">
+                <i class="fa-solid fa-wine-glass divider-icon"></i>
+            </div>
+        </header>
+
+        <main>
+            <section class="drinks-grid">
+                
+                <div class="drink-card active">
+                    <div class="badge">
+                        <i class="fa-solid fa-star"></i> Signature
+                    </div>
+                    <div class="drink-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&auto=format&fit=crop" alt="Sunset Flame Cocktail">
+                    </div>
+                    <h3>Sunset Flame</h3>
+                    <p>Tropical & Refreshing</p>
+                    <div class="price">$12.94</div>
+                </div>
+
+                <div class="drink-card">
+                    <div class="drink-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&auto=format&fit=crop" alt="Tropical Passion Cocktail">
+                    </div>
+                    <h3>Tropical Passion</h3>
+                    <p>Fruity & Exotic</p>
+                    <div class="price">$11.04</div>
+                </div>
+
+                <div class="drink-card">
+                    <div class="drink-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&auto=format&fit=crop" alt="Citrus Dawn Cocktail">
+                    </div>
+                    <h3>Citrus Dawn</h3>
+                    <p>Citrusy & Energizing</p>
+                    <div class="price">$10.13</div>
+                </div>
+
+                <div class="drink-card">
+                    <div class="badge">
+                        <span class="dot"></span> New
+                    </div>
+                    <div class="drink-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1587223075055-82e9a937ddff?w=400&auto=format&fit=crop" alt="Berry Breeze Cocktail">
+                    </div>
+                    <h3>Berry Breeze</h3>
+                    <p>Sweet & Cool</p>
+                    <div class="price">$9.48</div>
+                </div>
+
+            </section>
+
+            <section class="chef-special">
+                <div class="chef-image">
+                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&auto=format&fit=crop" alt="Premium Steak Dish">
+                </div>
+                <div class="chef-content">
+                    <div class="chef-label">CHEF'S SPECIAL</div>
+                    <h2>Bouliauts for laguancns</h2>
+                    <p class="subtitle">Experience our signature culinary creations.</p>
+                    <p class="description">
+                        Meticulously crafted with premium ingredients to deliver exceptional flavors and an unforgettable dining experience. Perfect for sharing or savoring on your own.
+                    </p>
+                    <button class="btn-explore">
+                        Explore Menu <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="copyright">
+                © Gunaforycter 2025
+            </div>
+            
+            <nav class="footer-nav">
+                <a href="#">Explore</a>
+                <span class="dot">&bull;</span>
+                <a href="#">Food Menu</a>
+                <span class="dot">&bull;</span>
+                <a href="#">Drinks</a>
+                <span class="dot">&bull;</span>
+                <a href="#">Reservations</a>
+            </nav>
+
+            <div class="footer-social">
+                <span>Follow Us</span>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
