@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squid Game - Watch Now</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0d0614;
+            --primary-pink: #e41f5a;
+            --gradient-pink: #d9215c;
+            --gradient-orange: #d95a2b;
+            --text-light: #ffffff;
+            --text-muted: #a09aab;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 70% 50%, rgba(131, 15, 69, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(183, 20, 68, 0.3) 0%, transparent 40%);
+            position: relative;
+        }
+
+        .bg-text-right {
+            position: absolute;
+            right: -50px;
+            top: 20%;
+            font-size: 250px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.02);
+            writing-mode: vertical-rl;
+            z-index: -1;
+            letter-spacing: 10px;
+        }
+
+        .bg-text-left {
+            position: absolute;
+            left: 5%;
+            bottom: 5%;
+            font-size: 150px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.02);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .logo-small {
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 2px;
+            display: flex;
+            flex-direction: column;
+            line-height: 0.8;
+        }
+
+        .logo-small span:last-child {
+            color: var(--primary-pink);
+            margin-left: 15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: var(--text-light);
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 60px;
+            min-height: 500px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 550px;
+            z-index: 2;
+        }
+
+        .main-logo {
+            margin-bottom: 30px;
+        }
+        
+        .main-logo h1 {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: 5px;
+        }
+
+        .main-logo .game-text {
+            color: var(--primary-pink);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .main-logo .line {
+            height: 4px;
+            width: 80px;
+            background-color: var(--primary-pink);
+            display: inline-block;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--gradient-pink), var(--gradient-orange));
+            border: none;
+            box-shadow: 0 10px 20px rgba(217, 33, 92, 0.3);
+        }
+
+        .btn-primary i {
+            background: white;
+            color: var(--primary-pink);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Middle elements */
+        .middle-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 100px;
+            z-index: 2;
+        }
+
+        .scroll-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .scroll-text::before {
+            content: '';
+            width: 2px;
+            height: 40px;
+            background-color: var(--primary-pink);
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            color: var(--primary-pink);
+        }
+        
+        .social-icons i {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .social-icons i:hover {
+            color: white;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: contain; 
+            background-color: transparent;
+            mask-image: linear-gradient(to top, transparent 5%, black 100%); 
+            -webkit-mask-image: linear-gradient(to top, transparent 5%, black 100%);
+        }
+
+        .cards-container {
+            margin-top: -50px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s;
+        }
+
+        .card:hover img {
+            filter: brightness(1.2);
+        }
+
+        .play-btn-small {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                margin-top: 30px;
+            }
+            .hero-content {
+                margin-bottom: 50px;
+            }
+            .buttons {
+                justify-content: center;
+            }
+            .middle-column {
+                display: none; 
+            }
+            .hero-image {
+                justify-content: center;
+            }
+            .cards-container {
+                margin-top: 30px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            .main-logo h1 {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-text-right">SQUID</div>
+    <div class="bg-text-left">GAME</div>
+
+    <div class="container">
+        <nav>
+            <div class="logo-small">
+                <span>SQUID</span>
+                <span>GAME-</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">About</a></li>
+                <li><a href="#" class="active">Watch now</a></li>
+                <li><a href="#">Actors</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <button class="menu-btn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <div class="main-logo">
+                    <h1>SQUID</h1>
+                    <h1 class="game-text">GAME <span class="line"></span></h1>
+                </div>
+                <p class="hero-desc">
+                    Action / Thriller / Drama Series directed by Dong-hyuk Hwang<br>
+                    Season 1: 9 Episodes
+                </p>
+                <div class="buttons">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fa-solid fa-play"></i> Play Now
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fa-regular fa-circle-play"></i> Watch Trailer
+                    </a>
+                </div>
+            </div>
+
+            <div class="middle-column">
+                <div class="scroll-text">SCROLL</div>
+                <div class="social-icons">
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="image-2.png" alt="Squid Game Guard">
+            </div>
+        </section>
+
+        <section class="cards-container">
+            <div class="card">
+                <img src="image-1.png" alt="Episode 1">
+                <div class="play-btn-small">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="image-3.png" alt="Episode 2">
+                <div class="play-btn-small">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="image-2.png" alt="Episode 3">
+                <div class="play-btn-small">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

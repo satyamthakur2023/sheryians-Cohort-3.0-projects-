@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #2b0b30 0%, #0d0b26 50%, #1a103c 100%);
+    color: white;
+    min-height: 100vh;
+    padding: 50px 80px;
+    position: relative; 
+}
+
+.dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+}
+.dot-left-top { top: 5%; left: 20px; }
+.dot-left-bottom { top: 85%; left: 20px; }
+.dot-right-middle { top: 75%; right: 20px; }
+.dot-right-bottom { top: 95%; right: 20px; }
+
+
+.main-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.header {
+    position: relative; 
+    margin-bottom: 30px;
+    display: flex; 
+    align-items: center;
+}
+
+.header h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.header .see-all {
+    position: absolute; 
+    right: 0;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.header .see-all:hover {
+    color: white;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: flex-start;
+}
+
+.card {
+   
+    flex: 0 0 calc(25% - 18px); 
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+    background-color: rgba(255, 255, 255, 0.08); 
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.card-info .title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.card-info .likes {
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+.bid-btn {
+    background: transparent;
+    color: white;
+    border: 1.5px solid #8e62d9;
+    border-radius: 25px;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: auto; 
+}
+
+.bid-btn:hover, .bid-btn.active {
+    background-color: #8e62d9;
+}
+.bid-btn:active {
+    transform: scale(0.95);
+}
